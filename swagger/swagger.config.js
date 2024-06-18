@@ -1,5 +1,3 @@
-// swagger.config.js
-
 import swaggerJsdoc from "swagger-jsdoc";
 
 const options = {
@@ -8,16 +6,12 @@ const options = {
     info: {
       title: "UMC_6th",
       version: "1.0.0",
-      description: "9week",
+      description: "APIs for UMC 6th project",
     },
     servers: [
       {
-        description: "SwaggerHub API Auto Mocking",
-        url: "https://virtserver.swaggerhub.com/EMILYPARK0987_1/UMC_6th/1.0.0",
-      },
-      {
-        description: "server address",
-        url: "http://localhost:3000/api-docs/",
+        url: "http://localhost:3000",
+        description: "Local server",
       },
     ],
     components: {
@@ -51,4 +45,4 @@ const options = {
 
 const specs = swaggerJsdoc(options);
 
-export default specs;
+export { specs };

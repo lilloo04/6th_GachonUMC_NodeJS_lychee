@@ -1,0 +1,80 @@
+openapi: 3.0.0
+info:
+  title: User API
+  version: 1.0.0
+  description: 익스프레스로 구현된 User API, 리뷰 관리 기능 포함
+paths:
+  /users/{userId}/reviews:
+    get:
+      summary: 사용자가 작성한 리뷰 가져오기
+      tags:
+        - 사용자
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 10
+      responses:
+        "200":
+          description: 성공적인 응답
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        store_name:
+                          type: string
+                        rate:
+                          type: integer
+                        review_content:
+                          type: string
+                        created_at:
+                          type: string
+        "400":
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: 사용자를 찾을 수 없음
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: 내부 서버 오류
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
